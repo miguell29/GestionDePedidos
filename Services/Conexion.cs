@@ -27,7 +27,6 @@ namespace GestionDePedidos.Services
             {
                 using (var connection = new SqlConnection(connectionString))
                 {
-                    connection.Open();
                     var query = "SELECT * FROM Cliente";
                     using (var adapter = new SqlDataAdapter(query, connection))
                     {
@@ -49,5 +48,34 @@ namespace GestionDePedidos.Services
                 return null;
             }
         }
+
+
+        public DataTable? GetPedidosCliente(int id)
+        {
+            var stringconnection = _configuration.GetConnectionString("MyDatabaseConnection");
+            try
+            {
+                using (var connection = new SqlConnection(stringconnection))
+                {
+                    var query = "SELECT * FROM Pedido P INNER JOIN Cliente C ON C.Id = P.CCliente WHERE C.Id = @ClienteId";
+                    var command = new SqlCommand(query, connection);
+                    command.Parameters.AddWithValue("@ClienteId", id);
+
+                    using (var adapter = new SqlDataAdapter(command))
+                    {
+                        var dataTable = new DataTable();
+                        adapter.Fill(dataTable);
+                        return dataTable;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error general: " + ex.Message);
+                return null;
+                
+            }
+        }
     }
+
 }
