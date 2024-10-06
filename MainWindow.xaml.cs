@@ -1,4 +1,6 @@
-﻿using System.Text;
+﻿using Microsoft.Extensions.Configuration;
+using System.Configuration;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -16,9 +18,15 @@ namespace GestionDePedidos
     /// </summary>
     public partial class MainWindow : Window
     {
+        private readonly IConfiguration _configuration;
         public MainWindow()
         {
+            _configuration = new ConfigurationBuilder()
+                .SetBasePath(AppDomain.CurrentDomain.BaseDirectory).AddJsonFile("appsettings.json").Build();
+            var connectionString = _configuration.GetConnectionString("MyDatabaseConnection");
             InitializeComponent();
+            MessageBox.Show(connectionString);
+
         }
     }
 }
