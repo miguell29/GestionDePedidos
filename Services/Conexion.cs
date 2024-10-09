@@ -76,6 +76,29 @@ namespace GestionDePedidos.Services
                 
             }
         }
+
+        public bool DeletePedido(int id)
+        {
+            var stringConnection = _configuration.GetConnectionString("myDataBaseConnection");
+            try
+            {
+                using (var connection = new SqlConnection(stringConnection))
+                {
+                    var query = "DELETE FROM PEDIDO WHERE Id = @Id";
+                    var command = new SqlCommand(query,connection);
+                    connection.Open();
+                    command.Parameters.AddWithValue("@Id", id);
+                    command.ExecuteNonQuery();
+                    return true;
+                }
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 
 }

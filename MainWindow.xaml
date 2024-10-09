@@ -9,9 +9,13 @@
     <Grid>
         <StackPanel>
             <TextBlock Text="Clientes"/>
-            <DataGrid x:Name="gridClientes" SelectionChanged="gridClientes_SelectionChanged"/>
+            <DataGrid x:Name="gridClientes" CanUserAddRows="False" Width="380"  Height="150" SelectionChanged="gridClientes_SelectionChanged"/>
             <TextBlock Text="Pedidos"/>
-            <DataGrid x:Name="gridPedidos" Margin="0,0,376,144" Height="76"/>
+            <DataGrid x:Name="gridPedidos" CanUserAddRows="False" Height="150" Width="600"/>
+            <Button Content="Borrar Pedido" Width="100" Height="50" Click="Button_Click"/>
+
+
+
         </StackPanel>
     </Grid>
 </Window>

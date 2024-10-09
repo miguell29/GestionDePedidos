@@ -27,7 +27,8 @@ namespace GestionDePedidos
             InitializeComponent();
             if (datatable != null)
             {
-                gridClientes.ItemsSource = datatable.DefaultView;   
+                gridClientes.SelectedValuePath = "Id";  
+                gridClientes.ItemsSource = datatable.DefaultView;
             }
             else
             {
@@ -37,10 +38,38 @@ namespace GestionDePedidos
 
         private void gridClientes_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var datatable = data.GetPedidosCliente(gridClientes.SelectedIndex);
-            if (datatable != null)
+            if (gridClientes.SelectedItem != null)
             {
-                gridPedidos.ItemsSource = datatable.DefaultView;
+                var datatable = data.GetPedidosCliente((int)gridClientes.SelectedValue);
+                if (datatable != null)
+                {
+                    gridPedidos.SelectedValuePath = "Id";
+                    gridPedidos.ItemsSource = datatable.DefaultView;
+                }
+            }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (gridPedidos.SelectedValue == null)
+            {
+                return;
+            }
+            if (data.DeletePedido((int)gridPedidos.SelectedValue))
+            {
+                if (gridClientes.SelectedItem != null)
+                {
+                    var datatable = data.GetPedidosCliente((int)gridClientes.SelectedValue);
+                    if (datatable != null)
+                    {
+                        gridPedidos.SelectedValuePath = "Id";
+                        gridPedidos.ItemsSource = datatable.DefaultView;
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Error al eliminar pedido"); 
             }
         }
     }
