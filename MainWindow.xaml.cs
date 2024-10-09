@@ -1,4 +1,5 @@
 ﻿
+using GestionDePedidos.Models;
 using GestionDePedidos.Services;
 using System.Data;
 using System.Text;
@@ -70,6 +71,26 @@ namespace GestionDePedidos
             else
             {
                 MessageBox.Show("Error al eliminar pedido"); 
+            }
+        }
+
+        private void gridClientes_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (gridClientes.SelectedItem != null)
+            {
+                DataRowView rowView = (DataRowView)gridClientes.SelectedItem; // Obtén el DataRowView
+
+                // Crea un nuevo objeto Cliente con los datos del DataRowView
+                Cliente cliente = new Cliente(
+                    (int)rowView["Id"],
+                    (string)rowView["Nombre"],
+                    (string)rowView["Direccion"],
+                    (string)rowView["Poblacion"],
+                    (string)rowView["Telefono"]
+                );
+
+                var editarCliente = new EditClient(cliente);
+                editarCliente.ShowDialog();
             }
         }
     }
