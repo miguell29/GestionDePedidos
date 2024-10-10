@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GestionDePedidos"
         mc:Ignorable="d"
-        Title="MainWindow" Height="650" Width="800" Background="LightGray">
+        Title="Gestion de Pedidos" Height="650" Width="800" Background="LightGray">
     <Grid>
         <StackPanel>
             <TextBlock Text="Clientes" FontSize="25" Margin="10" HorizontalAlignment="Center"/>
