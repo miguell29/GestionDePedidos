@@ -5,18 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GestionDePedidos"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="650" Width="800" Background="LightGray">
     <Grid>
         <StackPanel>
-            <TextBlock Text="Clientes"/>
-            <DataGrid x:Name="gridClientes"  IsReadOnly="True" ToolTip="doble click sobre un cliente para editar" MouseDoubleClick="gridClientes_MouseDoubleClick" CanUserAddRows="False" Width="380"  Height="150" SelectionChanged="gridClientes_SelectionChanged"/>
+            <TextBlock Text="Clientes" FontSize="25" Margin="10" HorizontalAlignment="Center"/>
+            <Separator Height="2" Background="Black" />
+            <DataGrid x:Name="gridClientes"  IsReadOnly="True" Margin="10" ToolTip="doble click sobre un cliente para editar" MouseDoubleClick="gridClientes_MouseDoubleClick" CanUserAddRows="False" Width="400"  Height="200" SelectionChanged="gridClientes_SelectionChanged"/>
             <Button Click="btnAgregarCliente_Click" Name="btnAgregarCliente" Content="Agregar un nuevo Cliente" Width="150" Height="50"/>
-            <TextBlock Text="Pedidos"/>
-            <DataGrid x:Name="gridPedidos" IsReadOnly="True" CanUserAddRows="False" Height="150" Width="600"/>
+            <TextBlock Text="Pedidos" FontSize="25" Margin="10" HorizontalAlignment="Center"/>
+            <Separator Height="2" Background="Black" />
+            <DataGrid x:Name="gridPedidos" IsReadOnly="True" Margin="10" CanUserAddRows="False" Height="150" Width="600"/>
             <Button Content="Borrar Pedido" Width="100" Height="50" Click="Button_Click"/>
-
-
-
         </StackPanel>
     </Grid>
 </Window>

@@ -5,20 +5,25 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GestionDePedidos"
         mc:Ignorable="d"
-        Title="Editar Datos del Cliente" Height="450" Width="800">
-    <StackPanel>
-        <TextBlock Text="{Binding Id}"/>
-        <TextBlock Text="Nombre"/>
-        <TextBox Text="{Binding Nombre}"/>
-        <TextBlock Text="Dirección"/>
-        <TextBox Text="{Binding Direccion}"/>
-        <TextBlock Text="Población"/>
-        <TextBox Text="{Binding Poblacion}"/>
-        <TextBlock Text="Teléfono"/>
-        <TextBox Text="{Binding Telefono}"/>
+        Title="Editar Datos del Cliente" Height="650" Width="400">
+    <StackPanel Margin="0,0,0,-6">
+        <TextBlock Text="{Binding Id}" FontSize="25" Margin="10" HorizontalAlignment="Center"/>
+        <Separator Height="2" Background="Black" Margin="10"/>
+        <TextBlock Text="Nombre" FontSize="20"  HorizontalAlignment="Center"/>
+        <TextBox Text="{Binding Nombre}" FontSize="20" Padding="10" Margin="5" Width="350"/>
+        <Separator Height="2" Background="LightBlue" Margin="10"/>
+        <TextBlock Text="Dirección" FontSize="20"  HorizontalAlignment="Center"/>
+        <TextBox Text="{Binding Direccion}"  FontSize="20" Padding="10" Margin="5" Width="350"/>
+        <Separator Height="2" Background="LightBlue" Margin="10"/>
+        <TextBlock Text="Población" FontSize="20"  HorizontalAlignment="Center"/>
+        <TextBox Text="{Binding Poblacion}"  FontSize="20" Padding="10" Margin="5" Width="350"/>
+        <Separator Height="2" Background="LightBlue" Margin="10"/>
+        <TextBlock Text="Teléfono" FontSize="20"  HorizontalAlignment="Center"/>
+        <TextBox Text="{Binding Telefono}"  FontSize="20" Padding="10" Margin="5" Width="350"/>
+        <Separator Height="2" Background="LightBlue" Margin="10"/>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-            <Button Name="btnUpdate" Content="Actualizar" Click="btnUpdate_Click"/>
-            <Button Name="btnCancel" Content="Cancelar" Click="btnCancel_Click"/>
+            <Button Name="btnUpdate" Content="Actualizar" Click="btnUpdate_Click" Padding="5" Margin="10" FontSize="20" Height="50" Width="120"/>
+            <Button Name="btnCancel" Content="Cancelar" Click="btnCancel_Click" Padding="5" Margin="10" FontSize="20" Height="50" Width="120"/>
         </StackPanel>
     </StackPanel>
 </Window>
