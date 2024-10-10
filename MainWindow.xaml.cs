@@ -99,5 +99,12 @@ namespace GestionDePedidos
                 MostrarClientes();
             }
         }
+
+        private void btnAgregarCliente_Click(object sender, RoutedEventArgs e)
+        {
+            var crearCliente = new CreateClientWindow();
+            crearCliente.ShowDialog();
+            MostrarClientes();
+        }
     }
 }

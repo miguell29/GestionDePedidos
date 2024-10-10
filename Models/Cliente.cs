@@ -21,6 +21,6 @@ namespace GestionDePedidos.Models
             Poblacion = poblacion;
             Telefono = telefono;
         }
-        Cliente() { }
+        public Cliente() { }
     }
 }

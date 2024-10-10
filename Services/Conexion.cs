@@ -8,22 +8,24 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using GestionDePedidos.Models;
+using System.Windows;
 
 namespace GestionDePedidos.Services
 {
     internal class Conexion
     {
         private readonly IConfiguration _configuration;
+        private string? connectionString;
 
         public Conexion()
         {
             _configuration = new ConfigurationBuilder()
                 .SetBasePath(AppDomain.CurrentDomain.BaseDirectory).AddJsonFile("appsettings.json").Build();
+            connectionString = _configuration.GetConnectionString("MyDatabaseConnection");
         }
 
         public DataTable? GetClientes()
         {
-            var connectionString = _configuration.GetConnectionString("MyDatabaseConnection");
             try
             {
                 using (var connection = new SqlConnection(connectionString))
@@ -53,10 +55,9 @@ namespace GestionDePedidos.Services
 
         public DataTable? GetPedidosCliente(int id)
         {
-            var stringconnection = _configuration.GetConnectionString("MyDatabaseConnection");
             try
             {
-                using (var connection = new SqlConnection(stringconnection))
+                using (var connection = new SqlConnection(connectionString))
                 {
                     var query = "SELECT * FROM Pedido P INNER JOIN Cliente C ON C.Id = P.CCliente WHERE C.Id = @ClienteId";
                     var command = new SqlCommand(query, connection);
@@ -80,10 +81,9 @@ namespace GestionDePedidos.Services
 
         public bool DeletePedido(int id)
         {
-            var stringConnection = _configuration.GetConnectionString("myDataBaseConnection");
             try
             {
-                using (var connection = new SqlConnection(stringConnection))
+                using (var connection = new SqlConnection(connectionString))
                 {
                     var query = "DELETE FROM PEDIDO WHERE Id = @Id";
                     var command = new SqlCommand(query,connection);
@@ -99,36 +99,59 @@ namespace GestionDePedidos.Services
                 throw;
             }
         }
-    public bool UpdateClient(Cliente cliente)
-    {
-        try
+  
+        public bool UpdateClient(Cliente cliente)
         {
-            var connectionstring = _configuration.GetConnectionString("MyDataBaseConnection");
-                using (var connection = new SqlConnection(connectionstring))
+            try
+            {                    using (var connection = new SqlConnection(connectionString))
+                    {
+                        var query = "UPDATE Cliente SET " +
+                            "Nombre = @nombre, " +
+                            "Direccion = @direccion," +
+                            "Poblacion = @poblacion," +
+                            "Telefono = @telefono " +
+                            "WHERE Id = @id";
+                        var command = new SqlCommand(query,connection);
+                        connection.Open();
+                        command.Parameters.AddWithValue("@nombre", cliente.Nombre);
+                        command.Parameters.AddWithValue("@direccion", cliente.Direccion);
+                        command.Parameters.AddWithValue("@poblacion",cliente.Poblacion);
+                        command.Parameters.AddWithValue("@telefono",cliente.Telefono);
+                        command.Parameters.AddWithValue("@id", cliente.Id);
+                        command.ExecuteNonQuery();
+                        return true;
+                    }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public bool CreateClient(Cliente cliente)
+        {
+            try
+            {
+                using (var connection = new SqlConnection(connectionString))
                 {
-                    var query = "UPDATE Cliente SET " +
-                        "Nombre = @nombre, " +
-                        "Direccion = @direccion," +
-                        "Poblacion = @poblacion," +
-                        "Telefono = @telefono " +
-                        "WHERE Id = @id";
-                    var command = new SqlCommand(query,connection);
+                    var query = "INSERT INTO Cliente (Nombre, Direccion, Poblacion, Telefono) " +
+                        "VALUES (@nombre, @direccion, @poblacion, @telefono)";
+                    var command = new SqlCommand(query, connection);
                     connection.Open();
                     command.Parameters.AddWithValue("@nombre", cliente.Nombre);
                     command.Parameters.AddWithValue("@direccion", cliente.Direccion);
-                    command.Parameters.AddWithValue("@poblacion",cliente.Poblacion);
-                    command.Parameters.AddWithValue("@telefono",cliente.Telefono);
-                    command.Parameters.AddWithValue("@id", cliente.Id);
+                    command.Parameters.AddWithValue("@poblacion", cliente.Poblacion);
+                    command.Parameters.AddWithValue("@telefono", cliente.Telefono);
                     command.ExecuteNonQuery();
                     return true;
                 }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
-        catch (Exception)
-        {
-
-            throw;
-        }
-    }
     }
 
 

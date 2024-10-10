@@ -1,0 +1,24 @@
+﻿<Window x:Class="GestionDePedidos.CreateClientWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GestionDePedidos"
+        mc:Ignorable="d"
+        Title="Crear un Nuevo Cliente" Height="450" Width="800">
+    <StackPanel>
+        <TextBlock Text="{Binding Id}"/>
+        <TextBlock Text="Nombre"/>
+        <TextBox Text="{Binding Nombre}"/>
+        <TextBlock Text="Dirección"/>
+        <TextBox Text="{Binding Direccion}"/>
+        <TextBlock Text="Población"/>
+        <TextBox Text="{Binding Poblacion}"/>
+        <TextBlock Text="Teléfono"/>
+        <TextBox Text="{Binding Telefono}"/>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button Name="btnCreate" Content="Crear" Click="btnCreate_Click"/>
+            <Button Name="btnCancel" Content="Cancelar" Click="btnCancel_Click"/>
+        </StackPanel>
+    </StackPanel>
+</Window>
