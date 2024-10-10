@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using GestionDePedidos.Models;
 
 namespace GestionDePedidos.Services
 {
@@ -95,10 +96,40 @@ namespace GestionDePedidos.Services
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
+    public bool UpdateClient(Cliente cliente)
+    {
+        try
+        {
+            var connectionstring = _configuration.GetConnectionString("MyDataBaseConnection");
+                using (var connection = new SqlConnection(connectionstring))
+                {
+                    var query = "UPDATE Cliente SET " +
+                        "Nombre = @nombre, " +
+                        "Direccion = @direccion," +
+                        "Poblacion = @poblacion," +
+                        "Telefono = @telefono " +
+                        "WHERE Id = @id";
+                    var command = new SqlCommand(query,connection);
+                    connection.Open();
+                    command.Parameters.AddWithValue("@nombre", cliente.Nombre);
+                    command.Parameters.AddWithValue("@direccion", cliente.Direccion);
+                    command.Parameters.AddWithValue("@poblacion",cliente.Poblacion);
+                    command.Parameters.AddWithValue("@telefono",cliente.Telefono);
+                    command.Parameters.AddWithValue("@id", cliente.Id);
+                    command.ExecuteNonQuery();
+                    return true;
+                }
+        }
+        catch (Exception)
+        {
+
+            throw;
+        }
     }
+    }
+
 
 }

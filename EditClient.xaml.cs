@@ -1,4 +1,5 @@
 ﻿using GestionDePedidos.Models;
+using GestionDePedidos.Services;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -21,10 +22,40 @@ namespace GestionDePedidos
     /// </summary>
     public partial class EditClient : Window
     {
+        private Conexion data;
+        private Cliente cliente;
         public EditClient(Cliente cliente)
         {
-            this.DataContext = cliente;
+            this.cliente = cliente;
+            this.DataContext = this.cliente;
             InitializeComponent();
+            data = new Conexion();
         }
+
+        private void btnCancel_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnUpdate_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (data.UpdateClient(cliente))
+                {
+                    MessageBox.Show("Cliente Actualizado.");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al Actualizar los datos: " + ex.Message);
+            }
+            finally 
+            { 
+                this.Close() ;
+            }
+            
+        }
+
     }
 }

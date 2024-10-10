@@ -5,8 +5,20 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GestionDePedidos"
         mc:Ignorable="d"
-        Title="EditClient" Height="450" Width="800">
-    <Grid>
-        <TextBlock Text="{Binding Path= Nombre}"/>
-    </Grid>
+        Title="Editar Datos del Cliente" Height="450" Width="800">
+    <StackPanel>
+        <TextBlock Text="{Binding Id}"/>
+        <TextBlock Text="Nombre"/>
+        <TextBox Text="{Binding Nombre}"/>
+        <TextBlock Text="Dirección"/>
+        <TextBox Text="{Binding Direccion}"/>
+        <TextBlock Text="Población"/>
+        <TextBox Text="{Binding Poblacion}"/>
+        <TextBlock Text="Teléfono"/>
+        <TextBox Text="{Binding Telefono}"/>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button Name="btnUpdate" Content="Actualizar" Click="btnUpdate_Click"/>
+            <Button Name="btnCancel" Content="Cancelar" Click="btnCancel_Click"/>
+        </StackPanel>
+    </StackPanel>
 </Window>

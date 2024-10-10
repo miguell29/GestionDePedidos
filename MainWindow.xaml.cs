@@ -24,11 +24,16 @@ namespace GestionDePedidos
         public MainWindow()
         {
             data = new Conexion();
-            var datatable = data.GetClientes();
             InitializeComponent();
+            MostrarClientes();
+        }
+
+        private void MostrarClientes()
+        {
+            var datatable = data.GetClientes();
             if (datatable != null)
             {
-                gridClientes.SelectedValuePath = "Id";  
+                gridClientes.SelectedValuePath = "Id";
                 gridClientes.ItemsSource = datatable.DefaultView;
             }
             else
@@ -91,6 +96,7 @@ namespace GestionDePedidos
 
                 var editarCliente = new EditClient(cliente);
                 editarCliente.ShowDialog();
+                MostrarClientes();
             }
         }
     }
